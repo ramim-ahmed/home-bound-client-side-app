@@ -14,9 +14,9 @@ export default function Nav() {
   return (
     <div className="border-b">
       <div className="max-w-5xl mx-auto px-3 flex justify-between items-center py-3">
-        <div>
+        <Link to="/">
           <h1 className="text-lg font-bold">Home Bound</h1>
-        </div>
+        </Link>
         <div className="flex items-center space-x-6">
           <div>
             <h1 className="font-medium">Host Your Home</h1>

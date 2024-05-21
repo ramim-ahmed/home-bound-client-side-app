@@ -82,6 +82,11 @@ export default function RoomDetails() {
                 <div>
                   <Button className="w-full">Reserve Now</Button>
                 </div>
+                <hr />
+                <div className="flex font-bold justify-between items-center">
+                  <h1>Total</h1>
+                  <h1>${price}</h1>
+                </div>
               </div>
             </div>
           </div>
