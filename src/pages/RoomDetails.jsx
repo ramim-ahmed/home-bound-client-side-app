@@ -2,9 +2,19 @@ import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
 import useBaseApi from "@/hooks/useBaseApi";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { DateRange } from "react-date-range";
 import { SlLocationPin } from "react-icons/sl";
 import { useParams } from "react-router-dom";
 export default function RoomDetails() {
+  const [reserveDate, setReserveDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: "selection",
+    },
+  ]);
+
   const baseApi = useBaseApi();
   const { id } = useParams();
   const { data: roomDetails, isLoading } = useQuery({
@@ -48,7 +58,7 @@ export default function RoomDetails() {
           />
         </div>
         <div className="grid grid-cols-12 mt-4 gap-8">
-          <div className="col-span-8">
+          <div className="col-span-7">
             <div className="bg-white p-4">
               <div className="flex items-center space-x-4">
                 <h1 className="font-medium">Hosted by {host.name}</h1>
@@ -69,7 +79,7 @@ export default function RoomDetails() {
               <p className="mt-3 text-gray-700">{description}</p>
             </div>
           </div>
-          <div className="col-span-4">
+          <div className="col-span-5">
             <div className="bg-white p-4">
               <div className="space-y-3">
                 <h3>
@@ -77,7 +87,20 @@ export default function RoomDetails() {
                 </h3>
                 <hr />
                 <div>
-                  <Button className="w-full">Booked Now</Button>
+                  <DateRange
+                    showDateDisplay={false}
+                    rangeColors={["#26A3BF"]}
+                    editableDateInputs={true}
+                    onChange={(item) => setReserveDate([item.selection])}
+                    moveRangeOnFirstSelection={false}
+                    ranges={reserveDate}
+                  />
+                </div>
+                <hr />
+                <div>
+                  <Button className="w-full bg-themeColor">
+                    Revervation Now
+                  </Button>
                 </div>
                 <hr />
                 <div className="flex font-bold justify-between items-center">

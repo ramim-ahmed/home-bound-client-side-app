@@ -5,6 +5,7 @@ import NotFound from "@/pages/NotFound";
 import Register from "@/pages/Register";
 import RoomDetails from "@/pages/RoomDetails";
 import { createBrowserRouter } from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -17,7 +18,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "/room/:id",
-        element: <RoomDetails />,
+        element: (
+          <PrivateRoute>
+            <RoomDetails />
+          </PrivateRoute>
+        ),
       },
     ],
   },

@@ -7,12 +7,20 @@ export default function SocialAuth() {
   const navigate = useNavigate();
   const location = useLocation();
   const handleGoogleAuth = async () => {
-    await signInWithGoogle();
-    navigate(location?.state ? location?.state : "/");
+    try {
+      await signInWithGoogle();
+      navigate(location?.state ? location?.state : "/");
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleGithubAuth = async () => {
-    await signInWithGithub();
-    navigate(location?.state ? location?.state : "/");
+    try {
+      await signInWithGithub();
+      navigate(location?.state ? location?.state : "/");
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="flex justify-center space-x-4">
