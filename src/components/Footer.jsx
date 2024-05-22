@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="text-gray-600 body-font bg-gray-50">
-      <div className="max-w-5xl px-3 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+      <div className="max-w-7xl px-3 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
         <div className="flex-grow flex flex-wrap md:pr-20 -mb-10 md:text-left text-center order-first w-full">
           <div className="lg:w-1/3 md:w-1/2 w-full">
             <h2 className="title-font text-gray-900 tracking-widest text-sm mb-3 font-semibold">
@@ -105,7 +105,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="bg-gray-100">
-        <div className="max-w-5xl mx-auto py-4 px-3 flex flex-wrap flex-col sm:flex-row">
+        <div className="max-w-7xl mx-auto py-4 px-3 flex flex-wrap flex-col sm:flex-row">
           <p className="text-gray-500 text-sm text-center sm:text-left">
             © {new Date().getFullYear()} Home Bound, Inc
           </p>

@@ -1,27 +1,17 @@
+import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
+import useBaseApi from "@/hooks/useBaseApi";
+import { useQuery } from "@tanstack/react-query";
 import { SlLocationPin } from "react-icons/sl";
+import { useParams } from "react-router-dom";
 export default function RoomDetails() {
-  const roomDetails = {
-    title: "Zostel Shangarh | Standard Private Room",
-    description:
-      "Offering a spectacular view of Himalayan glaciers and the majestic Sissu waterfall, Our hostel in Sissu is your key to exploring Himachal’s enchanting Lahaul region. A sprawling space decorated with outdoor seating and a field to play volleyball welcome you into the premises. Dorm rooms with balconies make you comfortable for work and rest, while vibrant common rooms keep the fun meter alive with indoor games.",
-    image:
-      "https://a0.muscache.com/im/pictures/2e59c7d2-3766-42cb-ba86-9958cbe307bc.jpg?im_w=1200",
-    location: "Himachal Pradesh, India",
-    category: "Beach",
-    to: "2024-05-25",
-    from: "2024-05-21",
-    price: 100,
-    guests: 2,
-    bathrooms: 1,
-    bedrooms: 1,
-    host: {
-      name: "Stive Rahman",
-      email: "stive@gmail.com",
-      photo:
-        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    },
-  };
+  const baseApi = useBaseApi();
+  const { id } = useParams();
+  const { data: roomDetails, isLoading } = useQuery({
+    queryKey: ["room-details", id],
+    queryFn: async () => await baseApi.get(`/rooms/${id}`),
+  });
+
   const {
     price,
     image,
@@ -32,7 +22,14 @@ export default function RoomDetails() {
     guests,
     bathrooms,
     bedrooms,
-  } = roomDetails || {};
+  } = roomDetails?.data?.data || {};
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <Loader />
+      </div>
+    );
+  }
   return (
     <div className="bg-gray-50">
       <div className="max-w-5xl mx-auto px-3 py-10">
@@ -80,7 +77,7 @@ export default function RoomDetails() {
                 </h3>
                 <hr />
                 <div>
-                  <Button className="w-full">Reserve Now</Button>
+                  <Button className="w-full">Booked Now</Button>
                 </div>
                 <hr />
                 <div className="flex font-bold justify-between items-center">

@@ -13,7 +13,7 @@ export default function Nav() {
   const { authUser, logout } = useAuth();
   return (
     <div className="border-b">
-      <div className="max-w-5xl mx-auto px-3 flex justify-between items-center py-3">
+      <div className="max-w-7xl mx-auto px-3 flex justify-between items-center py-3">
         <Link to="/">
           <h1 className="text-lg font-bold">Home Bound</h1>
         </Link>

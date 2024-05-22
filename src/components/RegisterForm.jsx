@@ -7,14 +7,15 @@ import { RiEyeOffLine } from "react-icons/ri";
 import { passwordValidator } from "@/utils/passwordValidator";
 import toast from "react-hot-toast";
 import SocialAuth from "./SocialAuth";
-import UploadPhoto from "./UploadPhoto";
 import { Button } from "./ui/button";
 import { BarLoader } from "react-spinners";
+import axios from "axios";
+import { Input } from "./ui/input";
 
 export default function RegisterForm() {
   const { signup, firebaseError, authUser, loading } = useAuth();
   const [isAgree, setIsAgree] = useState(false);
-  const [photo, setPhoto] = useState("");
+  const [imageFile, setImageFile] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
@@ -38,8 +39,23 @@ export default function RegisterForm() {
       return toast.error("password and confirm password not match!");
     }
     if (isAgree) {
-      await signup(email, password, username, photo);
-      reset();
+      try {
+        const imageData = new FormData();
+        imageData.append("file", imageFile);
+        imageData.append("upload_preset", "htrt75ob");
+        imageData.append("cloud_name", "dc68241xz");
+        // step: 1 // upload user photo;
+        const res = await axios.post(
+          "https://api.cloudinary.com/v1_1/dc68241xz/image/upload",
+          imageData
+        );
+        const photo = res.data.url;
+        //  step 2: call signup function
+        await signup(email, password, username, photo);
+        reset();
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   useEffect(() => {
@@ -75,7 +91,10 @@ export default function RegisterForm() {
         </div>
         <div className="relative mb-4">
           <div className="flex items-center space-x-4">
-            <UploadPhoto photo={photo} setPhoto={setPhoto} />
+            <Input
+              type="file"
+              onChange={(e) => setImageFile(e.target.files[0])}
+            />
           </div>
         </div>
         <div className="relative mb-4">
@@ -165,12 +184,6 @@ export default function RegisterForm() {
             Accept Terms And Conditions.
           </label>
         </div>
-        <button
-          type="submit"
-          className="text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none rounded text-lg disabled:bg-slate-500 w-full"
-        >
-          register
-        </button>
         <Button
           type="submit"
           className="w-full bg-blue-600"
