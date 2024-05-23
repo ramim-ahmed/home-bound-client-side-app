@@ -40,15 +40,27 @@ export default function Nav() {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-36">
               {authUser ? (
-                <DropdownMenuItem>
-                  <Button
-                    onClick={() => logout()}
-                    variant="outline"
-                    className="w-full flex justify-between"
-                  >
-                    Logout
-                  </Button>
-                </DropdownMenuItem>
+                <>
+                  <DropdownMenuItem>
+                    <Button
+                      onClick={() => logout()}
+                      variant="outline"
+                      className="w-full flex justify-between"
+                    >
+                      Logout
+                    </Button>
+                  </DropdownMenuItem>
+                  <Link to="/dashboard">
+                    <DropdownMenuItem>
+                      <Button
+                        variant="outline"
+                        className="w-full flex justify-between"
+                      >
+                        Dashboard
+                      </Button>
+                    </DropdownMenuItem>
+                  </Link>
+                </>
               ) : (
                 <>
                   <Link to="/login">

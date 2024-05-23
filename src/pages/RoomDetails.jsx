@@ -42,7 +42,7 @@ export default function RoomDetails() {
   }
   return (
     <div className="bg-gray-50">
-      <div className="max-w-5xl mx-auto px-3 py-10">
+      <div className="max-w-7xl mx-auto px-3 py-10">
         <div>
           <h1 className="text-xl font-semibold">{title}</h1>
           <p className="mt-2 font-semibold text-gray-600 flex items-center space-x-1">
@@ -58,7 +58,7 @@ export default function RoomDetails() {
           />
         </div>
         <div className="grid grid-cols-12 mt-4 gap-8">
-          <div className="col-span-7">
+          <div className="col-span-8">
             <div className="bg-white p-4">
               <div className="flex items-center space-x-4">
                 <h1 className="font-medium">Hosted by {host.name}</h1>
@@ -79,7 +79,7 @@ export default function RoomDetails() {
               <p className="mt-3 text-gray-700">{description}</p>
             </div>
           </div>
-          <div className="col-span-5">
+          <div className="col-span-4">
             <div className="bg-white p-4">
               <div className="space-y-3">
                 <h3>
