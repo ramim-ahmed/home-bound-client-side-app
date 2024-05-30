@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 export default function Room({ room }) {
   const { image, location, price, _id } = room || {};
   return (
-    <Link to={`/room/${_id}`} className="cursor-pointer">
-      <div>
+    <Link to={`/room/${_id}`} className="cursor-pointer group">
+      <div className=" overflow-hidden">
         <img
-          className="rounded-lg hover:scale-105 object-cover hover:duration-300 duration-300"
+          className="rounded-lg object-cover group-hover:scale-110 transition"
           src={image}
           alt=""
         />

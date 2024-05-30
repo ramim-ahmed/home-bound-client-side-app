@@ -9,8 +9,8 @@ import toast from "react-hot-toast";
 import SocialAuth from "./SocialAuth";
 import { Button } from "./ui/button";
 import { BarLoader } from "react-spinners";
-import axios from "axios";
 import { Input } from "./ui/input";
+import { uploadImage } from "./api/utils";
 
 export default function RegisterForm() {
   const { signup, firebaseError, authUser, loading } = useAuth();
@@ -40,21 +40,12 @@ export default function RegisterForm() {
     }
     if (isAgree) {
       try {
-        const imageData = new FormData();
-        imageData.append("file", imageFile);
-        imageData.append("upload_preset", "htrt75ob");
-        imageData.append("cloud_name", "dc68241xz");
-        // step: 1 // upload user photo;
-        const res = await axios.post(
-          "https://api.cloudinary.com/v1_1/dc68241xz/image/upload",
-          imageData
-        );
-        const photo = res.data.url;
+        const photo = await uploadImage(imageFile);
         //  step 2: call signup function
         await signup(email, password, username, photo);
         reset();
       } catch (error) {
-        console.log(error);
+        toast.error(error.message);
       }
     }
   };

@@ -41,15 +41,6 @@ export default function Nav() {
             <DropdownMenuContent className="w-36">
               {authUser ? (
                 <>
-                  <DropdownMenuItem>
-                    <Button
-                      onClick={() => logout()}
-                      variant="outline"
-                      className="w-full flex justify-between"
-                    >
-                      Logout
-                    </Button>
-                  </DropdownMenuItem>
                   <Link to="/dashboard">
                     <DropdownMenuItem>
                       <Button
@@ -60,6 +51,15 @@ export default function Nav() {
                       </Button>
                     </DropdownMenuItem>
                   </Link>
+                  <DropdownMenuItem>
+                    <Button
+                      onClick={() => logout()}
+                      variant="outline"
+                      className="w-full flex justify-between"
+                    >
+                      Logout
+                    </Button>
+                  </DropdownMenuItem>
                 </>
               ) : (
                 <>

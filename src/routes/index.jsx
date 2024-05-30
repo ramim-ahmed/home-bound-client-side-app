@@ -7,7 +7,9 @@ import RoomDetails from "@/pages/RoomDetails";
 import { createBrowserRouter } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "@/layouts/DashboardLayout";
-import Dashboard from "@/pages/Dashboard";
+import Statistics from "@/pages/Dashboard/common/Statistics";
+import AddRoom from "@/pages/Dashboard/Host/AddRoom";
+import MyListings from "@/pages/Dashboard/Host/MyListings";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -34,7 +36,15 @@ const routes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Dashboard />,
+        element: <Statistics />,
+      },
+      {
+        path: "add-room",
+        element: <AddRoom />,
+      },
+      {
+        path: "my-listings",
+        element: <MyListings />,
       },
     ],
   },

@@ -1,20 +1,10 @@
 import Loader from "@/components/Loader";
-import { Button } from "@/components/ui/button";
+import RoomReservation from "@/components/RoomReservation";
 import useBaseApi from "@/hooks/useBaseApi";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { DateRange } from "react-date-range";
 import { SlLocationPin } from "react-icons/sl";
 import { useParams } from "react-router-dom";
 export default function RoomDetails() {
-  const [reserveDate, setReserveDate] = useState([
-    {
-      startDate: new Date(),
-      endDate: null,
-      key: "selection",
-    },
-  ]);
-
   const baseApi = useBaseApi();
   const { id } = useParams();
   const { data: roomDetails, isLoading } = useQuery({
@@ -23,7 +13,6 @@ export default function RoomDetails() {
   });
 
   const {
-    price,
     image,
     description,
     title,
@@ -33,6 +22,7 @@ export default function RoomDetails() {
     bathrooms,
     bedrooms,
   } = roomDetails?.data?.data || {};
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -80,35 +70,7 @@ export default function RoomDetails() {
             </div>
           </div>
           <div className="col-span-4">
-            <div className="bg-white p-4">
-              <div className="space-y-3">
-                <h3>
-                  <span className="font-bold">${price}</span> night
-                </h3>
-                <hr />
-                <div>
-                  <DateRange
-                    showDateDisplay={false}
-                    rangeColors={["#26A3BF"]}
-                    editableDateInputs={true}
-                    onChange={(item) => setReserveDate([item.selection])}
-                    moveRangeOnFirstSelection={false}
-                    ranges={reserveDate}
-                  />
-                </div>
-                <hr />
-                <div>
-                  <Button className="w-full bg-themeColor">
-                    Revervation Now
-                  </Button>
-                </div>
-                <hr />
-                <div className="flex font-bold justify-between items-center">
-                  <h1>Total</h1>
-                  <h1>${price}</h1>
-                </div>
-              </div>
-            </div>
+            <RoomReservation room={roomDetails?.data?.data} />
           </div>
         </div>
       </div>
